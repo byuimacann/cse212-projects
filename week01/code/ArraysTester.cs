@@ -1,3 +1,10 @@
+using System.Dynamic;
+using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks.Dataflow;
+using System.Xml.XPath;
+
+
 public static class ArraysTester {
     /// <summary>
     /// Entry point for the tests
@@ -35,11 +42,17 @@ public static class ArraysTester {
     private static double[] MultiplesOf(double number, int length)
     {
         // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        
+        List<double> multiples = new List<double>(length); // Create a new instance of a list named 'multiples' to hold the parameter specified int quantity of multiples (list length). The list length is passed in as a parameter.
 
-        return new double[0]; // replace this return statement with your own
+        //Use a 'for' loop to iterate through the integers (1 - list length). Multiply integers and parameter number to get the multiple.Add the multiple to the new list names 'multiples'.
+        for (int i = 1; i <= length; i++ )
+        {
+            double multiple = number * i;
+            multiples.Add(multiple);  
+        }
+        
+        return multiples.ToArray(); // Convert list to an array and return array to the call point in the Run() function above. Learned how to convert a list to an array via a Google search...info found at this webpage: https://www.google.com/search?q=how+do+i+convert+a+list+to+an+array&oq=how+do+i+convert+a+list+to+an+array&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCAgCEAAYFhgeMggIAxAAGBYYHjIICAQQABgWGB4yCAgFEAAYFhgeMggIBhAAGBYYHjIICAcQABgWGB4yCAgIEAAYFhge0gEJMTAzNTBqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8.
     }
     
     /// <summary>
@@ -53,9 +66,16 @@ public static class ArraysTester {
     private static void RotateListRight(List<int> data, int amount)
     {
         // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        
+        var data1 = data.GetRange(0, data.Count - amount); //Get range of data from the beginning of the data List at index position 0 through the last index position minus the amount the list will need to be moved. The amount moved is passed in as a parameter. Store this in its own variable.
+
+        var data2 = data.GetRange(data.Count - amount, amount);//Get the remaining range of data that was not stored in the previous step. Store this in its own variable.
+
+        data.AddRange(data2); //Add second stored data range to the end of the original data list.
+
+        data.AddRange(data1); //Add first stored data range to the end of the original data list.
+
+        data.RemoveRange(0,data.Count-data1.Count-data2.Count); //Remove first half of the original list. 
 
     }
 }
