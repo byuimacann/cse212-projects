@@ -15,7 +15,8 @@
         // Console.WriteLine(players);    // This can be un-commented out for debug help
         while (players.Length > 0)
             players.GetNextPerson();
-        // Defect(s) Found: 
+        // Defect(s) Found: Person was being added to the beginning of the queue instead of the end. 
+        //Fixed in the PersonQueue class in Enqueue(). Insertion point was changed from a value of 0 (beginning of the queue) to _queue.Count (end of queue).
 
         Console.WriteLine("---------");
 
@@ -38,7 +39,7 @@
         while (players.Length > 0)
             players.GetNextPerson();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: No defects found.
 
         Console.WriteLine("---------");
 
@@ -56,7 +57,8 @@
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: Tim only shows up once and he should show up in  each iteration of the queue rotation. Showed that I needed to check for people with 0 or less turns. 
+        //Fixed in the TakingTurnsQueue class by adding an 'or' condition to the GetNextPerson() to check for people with 0 or less turns.
 
         Console.WriteLine("---------");
 
@@ -73,7 +75,7 @@
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: No defects found. 
 
         Console.WriteLine("---------");
 
@@ -83,6 +85,6 @@
         Console.WriteLine("Test 5");
         players = new TakingTurnsQueue();
         players.GetNextPerson();
-        // Defect(s) Found:
+        // Defect(s) Found: No defects found.
     }
 }

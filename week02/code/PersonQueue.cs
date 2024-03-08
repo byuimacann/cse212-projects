@@ -11,7 +11,9 @@ public class PersonQueue {
     /// </summary>
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person) {
-        _queue.Insert(0, person);
+        _queue.Insert(_queue.Count, person); // Defect found. 
+        //Insert point was at 0 (the beginning of the queue).
+        //Changed 0 to _queue.Count so that the person is inserted at the end of the queue.
     }
 
     public Person Dequeue() {
