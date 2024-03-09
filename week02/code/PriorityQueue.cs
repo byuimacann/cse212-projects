@@ -1,4 +1,6 @@
-﻿public class PriorityQueue {
+﻿using System.Runtime.CompilerServices;
+
+public class PriorityQueue {
     private List<PriorityItem> _queue = new();
 
     /// <summary>
@@ -22,11 +24,12 @@
 
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++) {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
+        for (int index = 1; index <= _queue.Count - 1; index++) {
+            if (_queue[index].Priority > _queue[highPriorityIndex].Priority)
                 highPriorityIndex = index;
-        }
-
+            }//Defect 1 found: Index needs to iterate through the last item on the list. Changed 'for' loop operator from < to <=.
+            //Defect 2 found: Doesn't display the top priority animal that is closest to the front of the list. Changed 'if' statement operator from >= to > to return the first top priority animal it iterates through instead of returning the last one.
+        
         // Remove and return the item with the highest priority
         var value = _queue[highPriorityIndex].Value;
         return value;
