@@ -194,7 +194,7 @@ public static class SetsAndMapsTester {
         var anagrams = new Dictionary<int, string>();
 
         //Convert string to char array and check to see if word length is the same of not. 
-        //If yes, then iterate through each letter and check to see if dictionary has key; if not then add to dictionary.
+        //If yes, then iterate through each letter and check to see if dictionary has key; if not then add to dictionary. Compare arrays.
         char[] letters1 = word1.ToLower().ToCharArray();
         char[] letters2 = word2.ToLower().ToCharArray();
         
@@ -296,5 +296,7 @@ public static class SetsAndMapsTester {
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to print out each place a earthquake has happened today and its magitude.
-    }
+       
+    }    
+    
 }
