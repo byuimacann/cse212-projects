@@ -30,6 +30,13 @@ public class Maze {
     /// </summary>
     public void MoveLeft() {
         // FILL IN CODE
+        if ((_currX - 1) > 0 && ((_currX - 1) <= 6))
+        {
+            _currX = _currX - 1;
+        }
+        else
+            Console.WriteLine("Can't go that way!");
+        
     }
 
     /// <summary>
@@ -38,6 +45,12 @@ public class Maze {
     /// </summary>
     public void MoveRight() {
         // FILL IN CODE
+         if ((_currX + 1) <= 6 && ((_currX + 1) > 0))
+        {
+            _currX = _currX + 1;
+        }
+        else
+            Console.WriteLine("Can't go that way!");
     }
 
     /// <summary>
@@ -46,7 +59,14 @@ public class Maze {
     /// </summary>
     public void MoveUp() {
         // FILL IN CODE
+        if (((_currY - 1) > 0) && ((_currY - 1) <= 6))
+        {
+            _currY = _currY - 1;
+        }
+        else
+            Console.WriteLine("Can't go that way!");
     }
+
 
     /// <summary>
     /// Check to see if you can move down.  If you can, then move.  If you
@@ -54,7 +74,14 @@ public class Maze {
     /// </summary>
     public void MoveDown() {
         // FILL IN CODE
+         if (((_currY + 1) <= 6) && ((_currY + 1) > 0))
+        {
+            _currY = _currY + 1;
+        }
+        else
+            Console.WriteLine("Can't go that way!");
     }
+
 
     public void ShowStatus() {
         Console.WriteLine($"Current location (x={_currX}, y={_currY})");

@@ -202,14 +202,11 @@ public static class SetsAndMapsTester {
         if (letters1.Length == letters2.Length)
         {
         
-            //foreach (var letter in letters1)
             for (int i = 0; i < letters1.Length; i++)
             {
                 if (!anagrams.ContainsKey(letters2[i]))
                 {   
-                    //anagrams[i.ToString()] = letters1[i].ToString();
-                    anagrams[letters2[i]] = letters1[i].ToString();
-                    
+                    anagrams[letters2[i]] = letters1[i].ToString();   
                 } 
             }
 
