@@ -1,4 +1,6 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json;
+using Microsoft.VisualBasic;
 
 public static class SetsAndMapsTester {
     public static void Run() {
@@ -111,6 +113,27 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        var pairs = new HashSet<string>();
+        foreach (var word in words)
+        {
+            char[] characters = word.ToCharArray(); //convert word in char array
+            var char1 = characters[0]; //store the first letter in the array.
+            var char2 = characters[1]; //store the second letter in the array.
+            var pair = "";
+            if (char1 != char2) //check for duplicate letters
+            {   
+                pair = $"{char2}{char1}"; // pair is the mirrored version of the word.
+                pairs.Add(word); // add word to pairs hashset
+            }
+            
+            
+            if (pairs.Contains(pair)) // check to see if pair value is in pairs hashset.
+                {
+                    Console.WriteLine($"{word} & {pair}");
+                }   
+                     
+        }
+        
     }
 
     /// <summary>
@@ -132,8 +155,17 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            //SOURCE***Wk3 Maps learning activity 'Building Summary Table' code sample was a source I used to help me complete this problem after I struggled with this problem for a long while.***
+            if (!degrees.ContainsKey(fields[3])) // check to see if dictionary includes key, if first occurance people count is 1.
+            {
+                degrees[fields[3]] = 1;
+            }
+            else if (degrees.ContainsKey(fields[3])) // check to see if dictionary includes key, if already in dictionary increment people count by 1.
+            {
+                degrees[fields[3]] += 1;
+            }
         }
-
+        
         return degrees;
     }
 
@@ -158,6 +190,38 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
+        //create new instance of dictionary
+        var anagrams = new Dictionary<int, string>();
+
+        //Convert string to char array and check to see if word length is the same of not. 
+        //If yes, then iterate through each letter and check to see if dictionary has key; if not then add to dictionary.
+        char[] letters1 = word1.ToLower().ToCharArray();
+        char[] letters2 = word2.ToLower().ToCharArray();
+        
+        
+        if (letters1.Length == letters2.Length)
+        {
+        
+            //foreach (var letter in letters1)
+            for (int i = 0; i < letters1.Length; i++)
+            {
+                if (!anagrams.ContainsKey(letters2[i]))
+                {   
+                    //anagrams[i.ToString()] = letters1[i].ToString();
+                    anagrams[letters2[i]] = letters1[i].ToString();
+                    
+                } 
+            }
+
+            for (int n = 0; n < letters2.Length; n++)
+            {
+                if (!letters2.Contains(letters1[n]))
+                {
+                    return false;
+                } 
+            }
+            return true; 
+        }
         return false;
     }
 
