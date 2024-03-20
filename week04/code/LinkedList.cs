@@ -1,4 +1,7 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
+using System.Transactions;
+using Microsoft.VisualBasic;
 
 public class LinkedList : IEnumerable<int> {
     private Node? _head;
@@ -20,6 +23,7 @@ public class LinkedList : IEnumerable<int> {
             newNode.Next = _head; // Connect new node to the previous head
             _head.Prev = newNode; // Connect the previous head to the new node
             _head = newNode; // Update the head to point to the new node
+            // Console.WriteLine($"Head Data for InsertHead(): {_head.Data}");
         }
     }
 
@@ -28,6 +32,21 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void InsertTail(int value) {
         // TODO Problem 1
+        //create new node
+        Node newNode = new Node(value);
+
+        if (_tail is null)
+        {
+            _head = newNode;
+            _tail = newNode;
+        }
+        else 
+        {
+            newNode.Prev = _tail; // connect new node to previous tail.
+            _tail.Next = newNode;//connect previous tail to the new node.
+            _tail = newNode;// update the tail to point to the new node.
+            // Console.WriteLine($"Tail Data for InsertTail(): {_tail.Data}");
+        }
     }
 
 
@@ -56,6 +75,16 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void RemoveTail() {
         // TODO Problem 2
+        if (_tail == _head) // if list is empty the head and tail are the same node.
+        {
+            _head = null;
+            _tail = null;
+        }
+        else if (_tail is not null) // if list isn't empty the tail if removed and the node previous to the tail becomes the new tail.
+        {
+            _tail.Prev!.Next = null; //node previous to the tail needs to have its next pointer point to nothing.
+            _tail = _tail.Prev; // tail now becomes the previous node.
+        }
     }
 
     /// <summary>
@@ -94,6 +123,27 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void Remove(int value) {
         // TODO Problem 3
+        Node? curr = _head; //start search at the head.
+        while (curr is not null)
+        {
+            if (curr.Data == value)
+            {
+                if (curr == _tail){
+                    RemoveTail();
+                }
+                else if (curr == _head)
+                {
+                    RemoveHead();
+                }
+                else
+                {
+                    curr.Next!.Prev = curr.Prev; // node after the current needs to point to the node before the current.
+                    curr.Prev!.Next = curr.Next; //node that is before to the removed node need to point to the next node in list after removal.
+                }
+                return;
+            }
+            curr = curr.Next;
+        }
     }
 
     /// <summary>
@@ -101,6 +151,15 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void Replace(int oldValue, int newValue) {
         // TODO Problem 4
+        Node? curr = _head; // start search at the head.
+        while (curr is not null)
+        {
+            if (curr.Data == oldValue)
+            {   
+                    curr.Data = newValue;
+            }
+            curr = curr.Next;
+        }
     }
 
     /// <summary>
@@ -121,13 +180,20 @@ public class LinkedList : IEnumerable<int> {
             curr = curr.Next; // Go forward in the linked list
         }
     }
+    
 
     /// <summary>
     /// Iterate backward through the Linked List
     /// </summary>
     public IEnumerable Reverse() {
         // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        var curr = _tail; //start at the end of the list since this is a backward iteration.
+        while (curr is not null)
+        {
+            yield return curr.Data; // return current data in list to user.
+            curr = curr.Prev; //Go backward in the linked list.
+        }
+ 
     }
 
     public override string ToString() {
