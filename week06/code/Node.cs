@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Dynamic;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -33,9 +34,22 @@ public class Node {
 
     public bool Contains(int value) {
         // TODO Start Problem 2
-        
-        return false;
-    }  
+        if (value < Data){
+            if (Left is null)
+                return false;    
+            if (!Left.Contains(value))
+                return false;    
+        }
+        if (value > Data){
+            if (Right is null)
+                return false;
+            if (!Right.Contains(value))
+                return false;
+            }
+        return true;
+    }
+    
+  
      
 
     
